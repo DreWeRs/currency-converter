@@ -1,0 +1,12 @@
+[api]
+url = 'https://v6.exchangerate-api.com/v6/{key}/latest/'
+
+[messages]
+base-currency-input = 'Введите основную валюту: '
+target-currency-input = 'Введите желаемую валюту: '
+amount-input = 'Введите сумму: '
+result-message = '{amount} ({base}) = {result_amount} ({target})'
+
+[errors]
+invalid-api = 'Incorrect API key'
+rate-error = 'Error when trying to get currency_rates'
