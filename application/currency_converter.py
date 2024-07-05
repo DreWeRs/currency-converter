@@ -1,7 +1,5 @@
 from types import MappingProxyType
-
 import requests
-
 from presentation.localization.message_manager import MessageManager
 
 
@@ -14,7 +12,8 @@ class CurrencyGetter:
     def get_currency_rate(self, base: str, target: str) -> float:
         response = requests.get(self.url + base)
 
-        if response.status_code == 403:
+        if response.status_code != 200:
+            print(response.text)
             raise ValueError('incorrect API key')
 
         data = MappingProxyType(response.json())
@@ -33,4 +32,3 @@ class CurrencyConverter:
 
     def get_target_amount(self, base: str, target: str, amount: float) -> float:
         return self.currency_getter.get_currency_rate(base, target) * amount
-

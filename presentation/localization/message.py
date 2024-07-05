@@ -14,3 +14,4 @@ class InfoMessage(Message):
 class ErrorMessage(Message):
     INVALID_API = auto()
     RATE_ERROR = auto()
+    AMOUNT_TYPE_ERROR = auto()

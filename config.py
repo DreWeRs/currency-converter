@@ -1,7 +1,6 @@
 import os
 from dataclasses import dataclass
 from types import MappingProxyType
-
 from presentation.localization.message_manager import Messages
 from presentation.localization.message import InfoMessage
 import tomllib
@@ -56,3 +55,9 @@ def load_messages(raw_config: Config) -> Messages:
     all_messages = info_messages | error_message
     messages = {code: all_messages[message_key] for code, message_key in CONFIG_OPTIONS.items()}
     return messages
+
+
+def load_currencies_list(raw_config: Config) -> list:
+    currencies = raw_config.get('currencies')
+    list_of_currencies = currencies.get('list-of-currencies')
+    return list_of_currencies
