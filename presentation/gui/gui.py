@@ -1,7 +1,6 @@
 import tkinter
 from tkinter import ttk, messagebox
 from application.currency_converter import CurrencyConverter
-from presentation.localization import message_manager
 from presentation.localization.message import InfoMessage
 from presentation.localization.message_manager import MessageManager
 
@@ -51,7 +50,7 @@ def show_result_info(base_combobox: str, target_combobox: str, amount_entry: flo
         messagebox.showerror(message='Amount must be float or integer type')
         exit()
 
-    result_amount = currency_converter.get_target_amount(base, target, amount)
+    result_amount = round(currency_converter.get_target_amount(base, target, amount), 2)
 
     result_message = message_manager.get_message(InfoMessage.RESULT_MESSAGE)
     result_message = result_message.format_map({
@@ -67,7 +66,7 @@ def show_result_info(base_combobox: str, target_combobox: str, amount_entry: flo
 
 
 def gui_result_process(base_combobox: str, target_combobox: str, amount_entry: float,
-                       currency_converter: CurrencyConverter):
+                       currency_converter: CurrencyConverter, message_manager: MessageManager):
     result_button = ttk.Button(text='Конвертировать',
                                command=lambda: show_result_info(base_combobox, target_combobox, amount_entry,
                                                                 currency_converter, message_manager))
@@ -77,5 +76,5 @@ def gui_result_process(base_combobox: str, target_combobox: str, amount_entry: f
 def gui(list_of_currences: list, currency_converter: CurrencyConverter, message_manager: MessageManager):
     window = window_setup()
     base, target, amount = gui_input_process(list_of_currences, message_manager)
-    gui_result_process(base, target, amount, currency_converter)
+    gui_result_process(base, target, amount, currency_converter, message_manager)
     window.mainloop()
